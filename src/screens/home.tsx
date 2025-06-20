@@ -1,13 +1,14 @@
 import * as React from "react";
-import { Text, View, StyleSheet } from "react-native";
-import Logo from "../components/Logo";
+import { View, StyleSheet } from "react-native";
+import VideoGrid from "../components/VideoGrid";
+import Header from "../components/Header";
+import FilterChips from "../components/FilterChips";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     backgroundColor: "#ecf0f1",
-    padding: 8
+    padding: 8,
   },
   title: {
     margin: 24,
@@ -22,13 +23,14 @@ const styles = StyleSheet.create({
 });
 
 const Home = () => {
+  const [filter, setFilter] = React.useState("All");
   return (
     <View style={styles.container}>
-      <Logo />
-      <Text style={styles.title}>MightyByte React Native Challenge.</Text>
-      <Text style={styles.subTitle}>
-        You are allowed to modify this project structure in any way you wish.
-      </Text>
+      <Header />
+      <FilterChips selected={filter} onChange={setFilter} />
+      <View style={{ flex: 1, minHeight: 0 }}>
+        <VideoGrid query={filter} />
+      </View>
     </View>
   );
 };
